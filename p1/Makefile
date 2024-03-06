@@ -1,5 +1,5 @@
 all:
-	vagrant up --provider libvirt
+	vagrant up --provider virtualbox
 
 destroy:
 	vagrant destroy hrecoletS hrecoletSW -f
