@@ -1,5 +1,6 @@
 apt update
 apt install curl -y
+sudo apt install net-tools -y
 
 while [ ! -f /vagrant/token ]; do
     echo "Waiting for token..."
