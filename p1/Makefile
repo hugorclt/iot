@@ -1,16 +1,8 @@
 all:
-	vagrant up --provider virtualbox
+	vagrant up --provider libvirt
 
 destroy:
-	vagrant destroy hrecoletS hrecoletSW -f
-
-# A tester
-stop:
-	vagrant halt hrecoletS hrecoletSW
-
-# A tester
-restart:
-	vagrant reload hrecoletS hrecoletSW
+	vagrant destroy sleleuS sleleuSW -f
 
 make re:
 	make destroy
