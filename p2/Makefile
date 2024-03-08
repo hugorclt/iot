@@ -1,6 +1,5 @@
 all:
 	vagrant up --provider libvirt
-	sudo bash add_hosts.sh
 
 destroy:
 	vagrant destroy sleleuS -f
