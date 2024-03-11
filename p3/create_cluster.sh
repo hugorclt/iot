@@ -1,15 +1,20 @@
 # Create cluster
-k3d cluster create sleleu
+k3d cluster create sleleu -p "8888:30080@loadbalancer" -p "8080:80@loadbalancer"
 
-# Create namespaces
-kubectl create namespace argocd
+
 kubectl create namespace dev
 
-# Install argocd (-n is for applying to)
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+## Install and setup ArgoCD
+kubectl create namespace argocd
+kubectl apply -n argocd -f ./argocd/install.yaml
+kubectl apply -n argocd -f ./argocd/ingress.yaml
+kubectl apply -n argocd -f ./argocd/project.yaml
+#kubectl apply -n argocd -f ./argocd/app.yaml
 
-# Apply ingress on argocd namespace
-kubectl apply -f ingress_argocd.yaml -n argocd
+## Install and setup dev project
+#kubectl apply -f ./dev/deployment-dev.yaml -n dev 
 
 # Get password of admin
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.data.password}” | base64 -d; echo
+#kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=”{.data.password}” | base64 -d; echo
+
+
