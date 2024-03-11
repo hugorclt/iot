@@ -1,20 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: AppProject
 metadata:
-  name: app
+  name: development
   labels:
-    app: app
+    app: development
 spec:
-  containers:
-    - name: app
-      image: wil42/playground:v1
-      ports:
-        - containerPort: 8888
-  destination:
-    namespace: dev
-    server: 'https://kubernetes.default.svc'
-  project: development
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  # Project description
+  description: Inception Of Things
+  # Allow manifests to deploy only from Sokube git repositories 
+  sourceRepos:
+  - "https://github.com/hugorclt/*"
+  # Only permit to deploy applications in the same cluster
+  destinations:
+  - namespace: dev
+    server: https://kubernetes.default.svc
+  # Enables namespace orphaned resource monitoring.
+  orphanedResources:
+    warn: false

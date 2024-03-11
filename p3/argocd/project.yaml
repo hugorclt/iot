@@ -1,18 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
-kind: AppProject
+kind: Application
 metadata:
-  name: development
+  name: app
   labels:
-    app: development
+    app: app
 spec:
-  # Project description
-  description: InceptionOfThings app
-  # Allow manifests to deploy only from Sokube git repositories 
-  sourceRepos:
-  - "https://github.com/hrecolet/*"
-  destinations:
-  - namespace: dev
-    server: https://kubernetes.default.svc
-  # Enables namespace orphaned resource monitoring.
-  orphanedResources:
-    warn: false
+  destination:
+    namespace: dev
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: config
+    repoURL: 'https://github.com/hugorclt/argocd-hrecolet.git'
+    targetRevision: HEAD
+  project: development
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

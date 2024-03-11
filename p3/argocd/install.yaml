@@ -78,7 +78,6 @@ spec:
                         description: Duration is the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
                         type: string
                       factor:
-                        description: Factor is a factor to multiply the base duration after each failed retry
                         format: int64
                         type: integer
                       maxDuration:
@@ -2740,6 +2739,7 @@ spec:
         - argocd-server
         - --staticassets
         - /shared/app
+        - --insecure
         image: quay.io/argoproj/argocd:v2.0.1
         imagePullPolicy: Always
         livenessProbe:
