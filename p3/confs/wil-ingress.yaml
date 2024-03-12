@@ -1,11 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-ingress
-  labels:
-    app: argocd
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
+  name: wil-ingress
+  namespace: dev
 spec:
   rules:
   - http:
@@ -14,7 +11,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: argocd-server
+            name: wil
             port:
-              number: 80
-
+              number: 8888
